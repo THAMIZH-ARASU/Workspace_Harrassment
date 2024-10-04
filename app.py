@@ -282,7 +282,8 @@ def main():
     elif page == "Detect harrasment for image":
         detect_harrasment_image()
     elif page == "Detect harrasment for video":
-        pass                
+        pass
+                    
     elif page == "Detect Video and alert":
         pass
 
