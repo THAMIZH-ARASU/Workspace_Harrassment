@@ -78,7 +78,7 @@ def preprocess_image(image_path):
     return img
 
 def make_image_prediction(image_path):
-    image_model = load_model('harrasment_model.h5')
+    image_model = load_model('harrasment_model.keras')
     new_image = preprocess_image(image_path)
 
     # Extract features using the VGG16 base model
@@ -97,6 +97,45 @@ def make_image_prediction(image_path):
     class_labels = {0: 'Healthy Workspace Environment :)', 1: '!! Sexual Harassment Detected !!'}
     predicted_class_label = class_labels[predicted_class_index]
     return predicted_class_label
+
+def make_video_prediction(model, base_model, uploaded_file):
+    # Create a temporary file to save the uploaded video
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as temp_file:
+        temp_file.write(uploaded_file.read())
+        temp_file_path = temp_file.name  # Get the path of the temporary file
+
+    cap = cv2.VideoCapture(temp_file_path)
+
+    st.write("Video Stream:")
+    stream = st.empty()
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        resized_frame = cv2.resize(frame, (224, 224))
+        preprocessed_frame = img_to_array(resized_frame)
+        preprocessed_frame = np.expand_dims(preprocessed_frame, axis=0)
+        preprocessed_frame = preprocess_input(preprocessed_frame)
+
+        features = base_model.predict(preprocessed_frame)
+        features_flatten = features.reshape(1, -1)
+
+        prediction = model.predict(features_flatten)[0]
+        class_label = np.argmax(prediction)
+        class_prob = prediction[class_label]
+
+        label = "Harassment" if class_label == 1 else "Non-Harassment"
+        confidence = round(class_prob * 100, 2)
+        prob_text = f"{label} ({confidence}%)"
+        color = (0, 255, 0) if label == "Non-Harassment" else (0, 0, 255)
+        cv2.putText(frame, prob_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color=color, thickness=2)
+
+        # Display the processed frame with overlay using Streamlit's st.image
+        stream.image(frame, channels="BGR", caption="Live Prediction")
+
+    cap.release()
 
 
 #Pages
@@ -211,6 +250,18 @@ def detect_harrasment_image():
         # Show the prediction result
         st.write("Prediction:", predicted_class)
 
+def detect_harrasment_videos():
+    st.title("Detect Harrasment for Video")
+    uploaded_file = st.file_uploader("Input Video to detect any incident of Sexual harassment", type=["mp4"])
+    model_path = "harrasment_model.keras"
+    model = load_model(model_path)
+
+    st.write("Press the button to start prediction:")
+    if st.button("Start Prediction"):
+        if (uploaded_file == None):
+            st.write("Please upload a video file")
+        else:
+            make_video_prediction(model, base_model, uploaded_file)
 
 def home():
     pass
@@ -258,8 +309,10 @@ def main():
     # Execute the functionality based on the URL page parameter
     if page == "Home":
         home()
+
     elif page == "About":
         about()
+
     elif page == "Real Time Harassment Detection":
         st.title("Live Harassment Detection")
         model_path = "weight.keras"
@@ -273,17 +326,22 @@ def main():
                 st.error(f"Failed to load model: {str(e)}")
         else:
             st.error("Model file not found.")
+
     elif page == "Real Time Face Prediction":
         pass
+
     elif page == "Capture faces for detection":
         capture_faces()
+
     elif page == "Train Face detection model":
         pass
+
     elif page == "Detect harrasment for image":
         detect_harrasment_image()
+
     elif page == "Detect harrasment for video":
-        pass
-                    
+        detect_harrasment_videos()
+
     elif page == "Detect Video and alert":
         pass
 
