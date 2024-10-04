@@ -264,10 +264,29 @@ def detect_harrasment_videos():
             make_video_prediction(model, base_model, uploaded_file)
 
 def home():
-    pass
+    st.title("Home Page")
+    st.write("Welcome to the Harassment Detection System.")
 
 def about():
-    pass
+    st.title("About Page")
+    st.write("### About this Application")
+    st.write("""
+    This application leverages the power of deep learning and computer vision to detect incidents of sexual harassment in real-time.
+    It integrates VGG16 for feature extraction and face recognition models to identify individuals involved.
+    The system aims to assist in enhancing safety and providing an early alert system in sensitive environments.
+    """)
+    st.write("### Technologies Used:")
+    st.markdown("""
+    - **VGG16**: A Convolutional Neural Network for image classification and feature extraction.
+    - **Face Recognition**: To recognize and track individuals.
+    - **Support Vector Machine**: For training the face recognition model.
+    - **Streamlit**: The web framework used to build this interactive interface.
+    """)
+    st.write("### Developer Info:")
+    st.markdown("""
+    Developed by a passionate team, aiming to provide innovative safety solutions through artificial intelligence and machine learning.
+    For any inquiries or contributions, feel free to contact the development team.
+    """)
 
 def main():
     # Get the current query parameters to control page navigation
