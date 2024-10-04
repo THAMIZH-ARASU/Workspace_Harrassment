@@ -16,9 +16,9 @@ import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 import tempfile
 
-FROM_ADDRESS = 'thamizharasu.saravanan835@ptuniv.edu.in'
-PASSWORD = 'nrsd veyl lcqc dcbl'
-TO_ADDRESS = 'amizharasu@gmail.com'
+FROM_ADDRESS = ''
+PASSWORD = ''
+TO_ADDRESS = ''
 
 
 def send_email(sender_email, sender_password, recipient_email, subject, message):
