@@ -67,6 +67,37 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+#helpers
+base_model = VGG16(weights='imagenet', include_top=False)
+
+def preprocess_image(image_path):
+    img = load_img(image_path, target_size=(224, 224))
+    img = img_to_array(img)
+    img = img / 255.0
+    img = np.expand_dims(img, axis=0)  # Add batch dimension as the model expects it
+    return img
+
+def make_image_prediction(image_path):
+    image_model = load_model('harrasment_model.h5')
+    new_image = preprocess_image(image_path)
+
+    # Extract features using the VGG16 base model
+    new_image_features = base_model.predict(new_image)
+
+    # Reshape the features
+    new_image_features = new_image_features.reshape(1, 7 * 7 * 512)
+
+    # Make predictions
+    predictions = image_model.predict(new_image_features)
+
+    # Since your model has 2 output neurons (softmax), you can use argmax to get the predicted class index
+    predicted_class_index = np.argmax(predictions[0])
+
+    # If your classes are labeled as 0 and 1, you can map the index back to class labels
+    class_labels = {0: 'Healthy Workspace Environment :)', 1: '!! Sexual Harassment Detected !!'}
+    predicted_class_label = class_labels[predicted_class_index]
+    return predicted_class_label
+
 
 #Pages
 def capture_faces():
@@ -165,6 +196,22 @@ def predict_and_display_camera(model, base_model):
 
     cap.release()
     stream.empty()
+
+def detect_harrasment_image():
+    st.title("Detect Harrasment for Image")
+    uploaded_file = st.file_uploader("Input an Image to detect any incident of Sexual harassment", type=["jpg", "png"])
+
+    if uploaded_file is not None:
+        # Display the uploaded image
+        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+
+        # Make prediction on the uploaded image
+        predicted_class = make_image_prediction(uploaded_file)
+
+        # Show the prediction result
+        st.write("Prediction:", predicted_class)
+
+
 def home():
     pass
 
@@ -233,9 +280,9 @@ def main():
     elif page == "Train Face detection model":
         pass
     elif page == "Detect harrasment for image":
-        pass
+        detect_harrasment_image()
     elif page == "Detect harrasment for video":
-        pass
+        pass                
     elif page == "Detect Video and alert":
         pass
 
