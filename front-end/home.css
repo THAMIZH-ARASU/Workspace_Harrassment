@@ -1,0 +1,223 @@
+:root {
+  --bg-color-dark: #1a1a1a;
+  --bg-color-p: #5c5c5c;
+  --bg-color-hover: #e74c3c;
+  --text-color-light: #f0f0f0;
+  --text-color-dark: #000000;
+  --text-color-highlight: #c0392b;
+  --content-bg-color: #000000;
+}
+
+/* :root {  
+    --bg-color-dark: #252525;
+    --bg-color-p: rgb(151, 3, 89);
+    --bg-color-hover: rgb(235, 15, 89);
+    --text-color-light: rgb(255, 255, 255);
+    --text-color-dark: rgb(0, 0, 0);
+    --text-color-highlight: rgb(226, 15, 50);
+  } */
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--bg-color-dark);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--bg-color-hover);
+}
+
+.nav_part {
+  padding-left: 200px;
+  background-color: var(--bg-color-dark);
+  display: flex;
+  justify-content: space-evenly;
+  gap: 70px;
+}
+
+.title {
+  background-color: var(--bg-color-dark);
+  padding-left: 30px;
+  font-family: "Martian Mono", monospace;
+  font-size: 50px;
+  text-decoration: underline var(--bg-color-hover);
+  color: var(--text-color-light);
+}
+
+.content {
+  background-color: var(--content-bg-color);
+  flex: 1;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.background-p {
+  text-decoration: wavy;
+  font-family: "Martian Mono", monospace;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 76vh;
+  font-weight: bold;
+  color: var(--bg-color-p);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+  line-height: 1;
+  letter-spacing: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.buttons-container:hover ~ .background-p {
+  opacity: 0;
+}
+
+.info-box {
+  /* object-fit: contain; */
+  padding-right: 48px;
+  margin-left: 235px;
+  margin-top: 150px;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 50%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+  justify-content: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:baseline ;
+}
+
+#info-box-0 {
+  opacity: 1;
+}
+
+.info-box pre {
+  background: none;
+  padding-top: 100px;
+  font-weight: bold;
+  padding-right: 50px;
+  font-family: "Lexend";
+  font-size: 70px;
+  color: var(--text-color-light);
+  margin-top: 10px;
+  text-align: center;
+}
+
+#info-box-1 pre {
+  color: var(--text-color-highlight);
+}
+
+#info-box-2 pre {
+  color: var(--bg-color-hover);
+}
+
+.buttons-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 25px;
+  padding-right: 50px;
+}
+
+.click-btn {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-light);
+  border: 1px solid var(--bg-color-hover);
+  padding: 20px 37px;
+  font-size: 1.4rem;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.5s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.click-btn:hover ~ .background-p {
+  opacity: 0;
+}
+
+.click-btn:hover {
+  background-color: var(--bg-color-hover);
+  color: rgb(243, 239, 239);
+  transform: translateY(-5px);
+  border: none;
+}
+
+.head_nav {
+  background-color: var(--bg-color-dark);
+  position: relative;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  color: var(--text-color-light);
+  transition: color 0.2s;
+}
+
+.head_nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--bg-color-hover);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.head_nav:hover {
+  cursor: pointer;
+  color: var(--bg-color-hover);
+}
+
+.head_nav:hover::after {
+  transform: scaleX(1);
+}
+
+footer {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-light);
+  text-align: center;
+  padding: 20px 0;
+  font-family: "Lexend", sans-serif;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+}
+.info-box img {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}

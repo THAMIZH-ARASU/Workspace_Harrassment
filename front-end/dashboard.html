@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- <header>
+      <div class="hc">
+        <a href="home.html" class="Home"
+          ><button>
+            <i class="fa-solid fa-house" id="ico"></i>Home</button
+        ></a>
+        <h1 class="title">Sexual Harassment Detection Dashboard</h1>
+      </div>
+    </header> -->
+    <header>
+      <div>
+        <h1 class="title">Pepper</h1>
+      </div>
+
+      <nav class="nav_part">
+        <a href="home.html" class="head_nav">Home</a>
+        <a href="dashboard.html" class="head_nav">Dashboard</a>
+        <a href="footage.html" class="head_nav">Real-Time Footage</a>
+        <a href="contributors.html" class="head_nav">Contributors</a>
+        <a href="learn_more.html" class="head_nav">Learn More</a>
+      </nav>
+    </header>
+    <main class="dashboard">
+      <!-- Overview Section -->
+      <section class="overview">
+        <div class="overview-box">
+          <h2>Total Incidents</h2>
+          <p>45</p>
+        </div>
+        <div class="overview-box">
+          <h2>Active Alerts</h2>
+          <p>5</p>
+        </div>
+      </section>
+
+      <!-- Recent Incidents List -->
+      <section class="recent-incidents">
+        <h2>Recent Incidents</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date/Time</th>
+              <th>Severity</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-10-02 14:30</td>
+              <td>High</td>
+              <td>Office Entrance</td>
+              <td>Unresolved</td>
+            </tr>
+            <tr>
+              <td>2024-10-01 10:15</td>
+              <td>Medium</td>
+              <td>Parking Lot</td>
+              <td>Resolved</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Real-Time Alerts Section -->
+      <section class="real-time-alerts">
+        <h2>Real-Time Alerts</h2>
+        <p>No ongoing alerts</p>
+      </section>
+
+      <!-- Actions Panel -->
+      <section class="actions-panel">
+        <h2>Quick Actions</h2>
+        <button onclick="location.href='https://google.com'">
+          Resolve Incident
+        </button>
+        <button>Escalate Incident</button>
+        <button>View Real-Time Footage</button>
+      </section>
+
+      <!-- Summary Chart (Placeholder) -->
+      <section class="summary-chart">
+        <h2>Incident Trend (Last 7 Days)</h2>
+        <div class="chart-placeholder">
+          <!-- Placeholder for a chart -->
+          <p>[Simple Graph Placeholder]</p>
+        </div>
+      </section>
+
+      <!-- Settings/Notifications -->
+      <section class="settings">
+        <h2>Settings/Notifications</h2>
+        <p>No new notifications</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Sexual Harassment Detection System</p>
+    </footer>
+  </body>
+</html>
